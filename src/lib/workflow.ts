@@ -31,16 +31,15 @@ export interface WorkflowState {
   isComplete: boolean;
 }
 
-// Definição das perguntas do workflow
+// Definição das perguntas do workflow baseadas na metodologia do artigo
 export const workflowQuestions: WorkflowQuestion[] = [
   {
     id: 'q1',
     type: 'multiple-choice',
     textKey: 'question1',
     options: [
-      { key: 'question1OptionA', value: 'option-a' },
-      { key: 'question1OptionB', value: 'option-b' },
-      { key: 'question1OptionC', value: 'option-c' }
+      { key: 'question1OptionA', value: 'option-a' }, // Não - dados podem ser inseridos no prompt
+      { key: 'question1OptionB', value: 'option-b' }  // Sim - volume inviabiliza inserção no prompt
     ]
   },
   {
@@ -48,9 +47,9 @@ export const workflowQuestions: WorkflowQuestion[] = [
     type: 'multiple-choice',
     textKey: 'question2',
     options: [
-      { key: 'question2OptionA', value: 'option-a' },
-      { key: 'question2OptionB', value: 'option-b' },
-      { key: 'question2OptionC', value: 'option-c' }
+      { key: 'question2OptionA', value: 'option-a' }, // Apenas fornecer informações como contexto
+      { key: 'question2OptionB', value: 'option-b' }, // Ensinar novos comportamentos
+      { key: 'question2OptionC', value: 'option-c' }  // Ambos
     ]
   },
   {
@@ -58,9 +57,8 @@ export const workflowQuestions: WorkflowQuestion[] = [
     type: 'multiple-choice',
     textKey: 'question3',
     options: [
-      { key: 'question3OptionA', value: 'option-a' },
-      { key: 'question3OptionB', value: 'option-b' },
-      { key: 'question3OptionC', value: 'option-c' }
+      { key: 'question3OptionA', value: 'option-a' }, // Sim - é viável implementar RAG
+      { key: 'question3OptionB', value: 'option-b' }  // Não - não é viável implementar RAG
     ]
   },
   {
@@ -68,42 +66,52 @@ export const workflowQuestions: WorkflowQuestion[] = [
     type: 'multiple-choice',
     textKey: 'question4',
     options: [
-      { key: 'question4OptionA', value: 'option-a' },
-      { key: 'question4OptionB', value: 'option-b' },
-      { key: 'question4OptionC', value: 'option-c' }
+      { key: 'question4OptionA', value: 'option-a' }, // Sim - dados atendem aos requisitos
+      { key: 'question4OptionB', value: 'option-b' }  // Não - dados não são suficientes
+    ]
+  },
+  {
+    id: 'q5',
+    type: 'multiple-choice',
+    textKey: 'question5',
+    options: [
+      { key: 'question5OptionA', value: 'option-a' }, // Sim - latência é aceitável
+      { key: 'question5OptionB', value: 'option-b' }  // Não - latência é alta demais
+    ]
+  },
+  {
+    id: 'q6',
+    type: 'multiple-choice',
+    textKey: 'question6',
+    options: [
+      { key: 'question6OptionA', value: 'option-a' }, // Sim - existem recursos suficientes
+      { key: 'question6OptionB', value: 'option-b' }  // Não - não há recursos adequados
     ]
   }
 ];
 
-// Definição dos resultados possíveis
+// Definição dos resultados possíveis baseados na metodologia do artigo
 export const workflowResults: WorkflowResult[] = [
   {
-    id: 'efficientFinetuning',
-    titleKey: 'efficientFinetuningTitle',
-    descriptionKey: 'efficientFinetuningDescription',
-    techniquesKey: 'efficientFinetuningTechniques',
-    benefitsKey: 'efficientFinetuningBenefits'
+    id: 'intermediateApproaches',
+    titleKey: 'intermediateApproachesTitle',
+    descriptionKey: 'intermediateApproachesDescription',
+    techniquesKey: 'intermediateApproachesTechniques',
+    benefitsKey: 'intermediateApproachesBenefits'
   },
   {
-    id: 'standardFinetuning',
-    titleKey: 'standardFinetuningTitle',
-    descriptionKey: 'standardFinetuningDescription',
-    techniquesKey: 'standardFinetuningTechniques',
-    benefitsKey: 'standardFinetuningBenefits'
+    id: 'fineTuning',
+    titleKey: 'fineTuningTitle',
+    descriptionKey: 'fineTuningDescription',
+    techniquesKey: 'fineTuningTechniques',
+    benefitsKey: 'fineTuningBenefits'
   },
   {
-    id: 'distributedTraining',
-    titleKey: 'distributedTrainingTitle',
-    descriptionKey: 'distributedTrainingDescription',
-    techniquesKey: 'distributedTrainingTechniques',
-    benefitsKey: 'distributedTrainingBenefits'
-  },
-  {
-    id: 'domainAdaptation',
-    titleKey: 'domainAdaptationTitle',
-    descriptionKey: 'domainAdaptationDescription',
-    techniquesKey: 'domainAdaptationTechniques',
-    benefitsKey: 'domainAdaptationBenefits'
+    id: 'rag',
+    titleKey: 'ragTitle',
+    descriptionKey: 'ragDescription',
+    techniquesKey: 'ragTechniques',
+    benefitsKey: 'ragBenefits'
   },
   {
     id: 'hybridApproach',
@@ -114,7 +122,7 @@ export const workflowResults: WorkflowResult[] = [
   }
 ];
 
-// Lógica do workflow
+// Lógica do workflow baseada na árvore de decisão do artigo
 export class WorkflowEngine {
   private state: WorkflowState;
 
@@ -143,7 +151,7 @@ export class WorkflowEngine {
     // Adiciona nova resposta
     this.state.answers.push({ questionId, answer });
 
-    // Determina próxima pergunta ou resultado
+    // Determina próxima pergunta ou resultado baseado na metodologia do artigo
     this.state.currentQuestionId = this.getNextQuestion(questionId, answer);
     
     // Verifica se o workflow está completo
@@ -158,13 +166,86 @@ export class WorkflowEngine {
   private getNextQuestion(currentQuestionId: string, answer: AnswerValue): string | null {
     switch (currentQuestionId) {
       case 'q1':
-        return 'q2'; // Sempre vai para pergunta 2
+        // Passo 1: Volume de dados
+        if (answer === 'option-a') {
+          // Não - dados podem ser inseridos no prompt -> Abordagens Intermediárias
+          return null; // Termina aqui
+        } else {
+          // Sim - volume inviabiliza -> Passo 2
+          return 'q2';
+        }
+      
       case 'q2':
-        return 'q3'; // Sempre vai para pergunta 3
+        // Passo 2: Finalidade da adaptação
+        if (answer === 'option-a') {
+          // Apenas contexto -> RAG (Passo 3)
+          return 'q3';
+        } else if (answer === 'option-b') {
+          // Apenas comportamentos -> Fine-Tuning (Passo 4)
+          return 'q4';
+        } else {
+          // Ambos -> Híbrido (precisa validar ambos os caminhos)
+          // Vamos para RAG primeiro (Passo 3)
+          return 'q3';
+        }
+      
       case 'q3':
-        return 'q4'; // Sempre vai para pergunta 4
+        // Passo 3: Viabilidade técnica do RAG
+        const q2Answer = this.state.answers.find(a => a.questionId === 'q2')?.answer;
+        
+        if (answer === 'option-a') {
+          // Sim - RAG é viável -> Passo 5 (latência)
+          return 'q5';
+        } else {
+          // Não - RAG não é viável
+          if (q2Answer === 'option-a') {
+            // Se era só contexto e RAG não é viável -> Abordagens Intermediárias
+            return null;
+          } else {
+            // Se era híbrido ou comportamentos -> vai para Fine-Tuning (Passo 4)
+            return 'q4';
+          }
+        }
+      
       case 'q4':
-        return null; // Termina após pergunta 4
+        // Passo 4: Qualidade dos dados para Fine-Tuning
+        if (answer === 'option-a') {
+          // Sim - dados são adequados -> Passo 6 (recursos)
+          return 'q6';
+        } else {
+          // Não - dados não são adequados -> Abordagens Intermediárias
+          return null;
+        }
+      
+      case 'q5':
+        // Passo 5: Latência do RAG
+        const q2AnswerForQ5 = this.state.answers.find(a => a.questionId === 'q2')?.answer;
+        
+        if (answer === 'option-a') {
+          // Sim - latência é aceitável
+          if (q2AnswerForQ5 === 'option-c') {
+            // Se era híbrido, ainda precisa validar Fine-Tuning
+            return 'q4';
+          } else {
+            // Se era só contexto -> RAG
+            return null;
+          }
+        } else {
+          // Não - latência é alta demais
+          if (q2AnswerForQ5 === 'option-a') {
+            // Se era só contexto -> Abordagens Intermediárias
+            return null;
+          } else {
+            // Se era híbrido -> vai para Fine-Tuning
+            return 'q4';
+          }
+        }
+      
+      case 'q6':
+        // Passo 6: Recursos para Fine-Tuning
+        // Sempre termina aqui
+        return null;
+      
       default:
         return null;
     }
@@ -175,51 +256,57 @@ export class WorkflowEngine {
     const q2Answer = this.state.answers.find(a => a.questionId === 'q2')?.answer;
     const q3Answer = this.state.answers.find(a => a.questionId === 'q3')?.answer;
     const q4Answer = this.state.answers.find(a => a.questionId === 'q4')?.answer;
+    const q5Answer = this.state.answers.find(a => a.questionId === 'q5')?.answer;
+    const q6Answer = this.state.answers.find(a => a.questionId === 'q6')?.answer;
 
-    // Lógica de decisão baseada nas respostas
-    
-    // Se dataset pequeno e recursos limitados -> Efficient Fine-tuning
-    if (q1Answer === 'option-a' && q2Answer === 'option-a') {
-      return ['efficientFinetuning'];
+    // Passo 1: Se dados podem ser inseridos no prompt
+    if (q1Answer === 'option-a') {
+      return ['intermediateApproaches'];
     }
+
+    // A partir daqui, sabemos que q1Answer === 'option-b' (volume inviabiliza prompt)
     
-    // Se dataset grande e recursos extensos -> Distributed Training
-    if (q1Answer === 'option-c' && q2Answer === 'option-c') {
-      return ['distributedTraining'];
+    // Passo 2: Finalidade da adaptação
+    if (q2Answer === 'option-a') {
+      // Apenas contexto -> caminho RAG
+      if (q3Answer === 'option-a' && q5Answer === 'option-a') {
+        // RAG viável e latência aceitável
+        return ['rag'];
+      } else {
+        // RAG não viável ou latência alta
+        return ['intermediateApproaches'];
+      }
+    } else if (q2Answer === 'option-b') {
+      // Apenas comportamentos -> caminho Fine-Tuning
+      if (q4Answer === 'option-a' && q6Answer === 'option-a') {
+        // Dados adequados e recursos suficientes
+        return ['fineTuning'];
+      } else {
+        // Dados inadequados ou recursos insuficientes
+        return ['intermediateApproaches'];
+      }
+    } else if (q2Answer === 'option-c') {
+      // Ambos -> caminho híbrido
+      const ragViable = q3Answer === 'option-a' && q5Answer === 'option-a';
+      const fineTuningViable = q4Answer === 'option-a' && q6Answer === 'option-a';
+      
+      if (ragViable && fineTuningViable) {
+        // Ambos viáveis -> Híbrido
+        return ['hybridApproach'];
+      } else if (ragViable) {
+        // Só RAG viável
+        return ['rag'];
+      } else if (fineTuningViable) {
+        // Só Fine-Tuning viável
+        return ['fineTuning'];
+      } else {
+        // Nenhum viável
+        return ['intermediateApproaches'];
+      }
     }
-    
-    // Se objetivo é adaptação de domínio -> Domain Adaptation
-    if (q3Answer === 'option-c') {
-      return ['domainAdaptation'];
-    }
-    
-    // Se objetivo é pré-treinamento do zero e recursos extensos -> Distributed Training
-    if (q3Answer === 'option-b' && q2Answer === 'option-c') {
-      return ['distributedTraining'];
-    }
-    
-    // Se dataset médio e recursos moderados -> Standard Fine-tuning
-    if (q1Answer === 'option-b' && q2Answer === 'option-b') {
-      return ['standardFinetuning'];
-    }
-    
-    // Se prioridade é velocidade -> Efficient Fine-tuning
-    if (q4Answer === 'option-a') {
-      return ['efficientFinetuning'];
-    }
-    
-    // Se prioridade é qualidade máxima e recursos permitem -> Distributed Training
-    if (q4Answer === 'option-c' && q2Answer !== 'option-a') {
-      return ['distributedTraining'];
-    }
-    
-    // Casos híbridos ou balanceados
-    if (q4Answer === 'option-b') {
-      return ['hybridApproach'];
-    }
-    
-    // Default para abordagem padrão
-    return ['standardFinetuning'];
+
+    // Fallback
+    return ['intermediateApproaches'];
   }
 
   restart(): WorkflowState {
@@ -247,14 +334,14 @@ export class WorkflowEngine {
     this.state.isComplete = false;
     this.state.results = [];
     
-    // Determina pergunta atual baseada nas respostas restantes
+    // Reconstrói o caminho
     if (this.state.answers.length === 0) {
       this.state.currentQuestionId = 'q1';
     } else {
-      // Reconstrói o caminho
-      this.state.currentQuestionId = 'q1';
+      // Reconstrói o caminho baseado nas respostas restantes
       const answers = [...this.state.answers];
       this.state.answers = [];
+      this.state.currentQuestionId = 'q1';
       
       for (const answer of answers) {
         this.answerQuestion(answer.questionId, answer.answer);
