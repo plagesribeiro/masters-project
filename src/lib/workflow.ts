@@ -1,11 +1,11 @@
-export type QuestionType = 'yes-no' | 'multiple-choice';
-export type AnswerValue = 'yes' | 'no' | 'both' | 'option-a' | 'option-b';
+export type QuestionType = 'multiple-choice';
+export type AnswerValue = 'option-a' | 'option-b' | 'option-c';
 
 export interface WorkflowQuestion {
   id: string;
   type: QuestionType;
   textKey: string;
-  options?: {
+  options: {
     key: string;
     value: AnswerValue;
   }[];
@@ -15,6 +15,8 @@ export interface WorkflowResult {
   id: string;
   titleKey: string;
   descriptionKey: string;
+  techniquesKey: string;
+  benefitsKey: string;
 }
 
 export interface WorkflowAnswer {
@@ -33,8 +35,13 @@ export interface WorkflowState {
 export const workflowQuestions: WorkflowQuestion[] = [
   {
     id: 'q1',
-    type: 'yes-no',
-    textKey: 'question1'
+    type: 'multiple-choice',
+    textKey: 'question1',
+    options: [
+      { key: 'question1OptionA', value: 'option-a' },
+      { key: 'question1OptionB', value: 'option-b' },
+      { key: 'question1OptionC', value: 'option-c' }
+    ]
   },
   {
     id: 'q2',
@@ -43,42 +50,67 @@ export const workflowQuestions: WorkflowQuestion[] = [
     options: [
       { key: 'question2OptionA', value: 'option-a' },
       { key: 'question2OptionB', value: 'option-b' },
-      { key: 'question2OptionBoth', value: 'both' }
+      { key: 'question2OptionC', value: 'option-c' }
     ]
   },
   {
     id: 'q3',
-    type: 'yes-no',
-    textKey: 'question3'
+    type: 'multiple-choice',
+    textKey: 'question3',
+    options: [
+      { key: 'question3OptionA', value: 'option-a' },
+      { key: 'question3OptionB', value: 'option-b' },
+      { key: 'question3OptionC', value: 'option-c' }
+    ]
   },
   {
     id: 'q4',
-    type: 'yes-no',
-    textKey: 'question4'
+    type: 'multiple-choice',
+    textKey: 'question4',
+    options: [
+      { key: 'question4OptionA', value: 'option-a' },
+      { key: 'question4OptionB', value: 'option-b' },
+      { key: 'question4OptionC', value: 'option-c' }
+    ]
   }
 ];
 
 // Definição dos resultados possíveis
 export const workflowResults: WorkflowResult[] = [
   {
-    id: 'result1',
-    titleKey: 'result1Title',
-    descriptionKey: 'result1Description'
+    id: 'efficientFinetuning',
+    titleKey: 'efficientFinetuningTitle',
+    descriptionKey: 'efficientFinetuningDescription',
+    techniquesKey: 'efficientFinetuningTechniques',
+    benefitsKey: 'efficientFinetuningBenefits'
   },
   {
-    id: 'result2',
-    titleKey: 'result2Title',
-    descriptionKey: 'result2Description'
+    id: 'standardFinetuning',
+    titleKey: 'standardFinetuningTitle',
+    descriptionKey: 'standardFinetuningDescription',
+    techniquesKey: 'standardFinetuningTechniques',
+    benefitsKey: 'standardFinetuningBenefits'
   },
   {
-    id: 'result3',
-    titleKey: 'result3Title',
-    descriptionKey: 'result3Description'
+    id: 'distributedTraining',
+    titleKey: 'distributedTrainingTitle',
+    descriptionKey: 'distributedTrainingDescription',
+    techniquesKey: 'distributedTrainingTechniques',
+    benefitsKey: 'distributedTrainingBenefits'
   },
   {
-    id: 'result2and3',
-    titleKey: 'result2And3Title',
-    descriptionKey: 'result2And3Description'
+    id: 'domainAdaptation',
+    titleKey: 'domainAdaptationTitle',
+    descriptionKey: 'domainAdaptationDescription',
+    techniquesKey: 'domainAdaptationTechniques',
+    benefitsKey: 'domainAdaptationBenefits'
+  },
+  {
+    id: 'hybridApproach',
+    titleKey: 'hybridApproachTitle',
+    descriptionKey: 'hybridApproachDescription',
+    techniquesKey: 'hybridApproachTechniques',
+    benefitsKey: 'hybridApproachBenefits'
   }
 ];
 
@@ -126,25 +158,13 @@ export class WorkflowEngine {
   private getNextQuestion(currentQuestionId: string, answer: AnswerValue): string | null {
     switch (currentQuestionId) {
       case 'q1':
-        return answer === 'yes' ? null : 'q2'; // Se sim, vai para resultado 1. Se não, vai para pergunta 2
-      
+        return 'q2'; // Sempre vai para pergunta 2
       case 'q2':
-        if (answer === 'option-a') return 'q3'; // Eficiência -> pergunta 3
-        if (answer === 'option-b') return 'q4'; // Qualidade -> pergunta 4
-        if (answer === 'both') return 'q3'; // Ambos -> pergunta 3 primeiro, depois 4
-        return null;
-      
+        return 'q3'; // Sempre vai para pergunta 3
       case 'q3':
-        // Se veio de q2 com "both", ainda precisa responder q4
-        const q2Answer = this.state.answers.find(a => a.questionId === 'q2')?.answer;
-        if (q2Answer === 'both') {
-          return 'q4';
-        }
-        return null; // Senão, termina
-      
+        return 'q4'; // Sempre vai para pergunta 4
       case 'q4':
-        return null; // Sempre termina após q4
-      
+        return null; // Termina após pergunta 4
       default:
         return null;
     }
@@ -156,39 +176,50 @@ export class WorkflowEngine {
     const q3Answer = this.state.answers.find(a => a.questionId === 'q3')?.answer;
     const q4Answer = this.state.answers.find(a => a.questionId === 'q4')?.answer;
 
-    // Pergunta 1: Se sim -> Resultado 1
-    if (q1Answer === 'yes') {
-      return ['result1'];
-    }
-
-    // Se chegou aqui, q1 foi "no", então temos q2
-    if (q2Answer === 'option-a') {
-      // Foco em eficiência -> q3
-      return q3Answer === 'yes' ? ['result2'] : ['result2'];
+    // Lógica de decisão baseada nas respostas
+    
+    // Se dataset pequeno e recursos limitados -> Efficient Fine-tuning
+    if (q1Answer === 'option-a' && q2Answer === 'option-a') {
+      return ['efficientFinetuning'];
     }
     
-    if (q2Answer === 'option-b') {
-      // Foco em qualidade -> q4
-      return q4Answer === 'yes' ? ['result3'] : ['result3'];
+    // Se dataset grande e recursos extensos -> Distributed Training
+    if (q1Answer === 'option-c' && q2Answer === 'option-c') {
+      return ['distributedTraining'];
     }
     
-    if (q2Answer === 'both') {
-      // Ambos -> q3 e q4
-      const needsEfficiency = q3Answer === 'yes';
-      const needsQuality = q4Answer === 'yes';
-      
-      if (needsEfficiency && needsQuality) {
-        return ['result2and3'];
-      } else if (needsEfficiency) {
-        return ['result2'];
-      } else if (needsQuality) {
-        return ['result3'];
-      } else {
-        return ['result2and3']; // Default para abordagem híbrida
-      }
+    // Se objetivo é adaptação de domínio -> Domain Adaptation
+    if (q3Answer === 'option-c') {
+      return ['domainAdaptation'];
     }
-
-    return ['result1']; // Fallback
+    
+    // Se objetivo é pré-treinamento do zero e recursos extensos -> Distributed Training
+    if (q3Answer === 'option-b' && q2Answer === 'option-c') {
+      return ['distributedTraining'];
+    }
+    
+    // Se dataset médio e recursos moderados -> Standard Fine-tuning
+    if (q1Answer === 'option-b' && q2Answer === 'option-b') {
+      return ['standardFinetuning'];
+    }
+    
+    // Se prioridade é velocidade -> Efficient Fine-tuning
+    if (q4Answer === 'option-a') {
+      return ['efficientFinetuning'];
+    }
+    
+    // Se prioridade é qualidade máxima e recursos permitem -> Distributed Training
+    if (q4Answer === 'option-c' && q2Answer !== 'option-a') {
+      return ['distributedTraining'];
+    }
+    
+    // Casos híbridos ou balanceados
+    if (q4Answer === 'option-b') {
+      return ['hybridApproach'];
+    }
+    
+    // Default para abordagem padrão
+    return ['standardFinetuning'];
   }
 
   restart(): WorkflowState {

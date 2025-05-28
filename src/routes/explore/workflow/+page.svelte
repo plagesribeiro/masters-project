@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { Navbar, t } from '$lib';
-  import { workflowResults, type WorkflowState, type WorkflowQuestion, type AnswerValue } from '$lib/workflow';
+  import { workflowResults, workflowQuestions, type WorkflowState, type WorkflowQuestion, type AnswerValue } from '$lib/workflow';
   
   /** @type {WorkflowState} */
   let workflowState = $state({
@@ -124,12 +124,6 @@
     if (!currentQuestion) return 0;
     return parseInt(currentQuestion.id.replace('q', ''));
   }
-  
-  function getProgressPercentage() {
-    const totalQuestions = 4; // Máximo de perguntas possíveis
-    const answeredQuestions = workflowState.answers.length;
-    return Math.min((answeredQuestions / totalQuestions) * 100, 100);
-  }
 </script>
 
 <svelte:head>
@@ -146,15 +140,6 @@
       <div class="max-w-4xl mx-auto text-center">
         <h1 class="text-4xl font-bold text-primary mb-4">{$t('workflowTitle')}</h1>
         <p class="text-lg text-base-content/80">{$t('workflowSubtitle')}</p>
-        
-        <!-- Progress Bar -->
-        <div class="mt-6 max-w-md mx-auto">
-          <div class="flex justify-between text-sm text-base-content/60 mb-2">
-            <span>{$t('progress')}</span>
-            <span>{Math.round(getProgressPercentage())}%</span>
-          </div>
-          <progress class="progress progress-primary w-full" value={getProgressPercentage()} max="100"></progress>
-        </div>
       </div>
     </div>
   </div>
@@ -184,17 +169,48 @@
             </div>
             
             <!-- Results -->
-            <div class="space-y-4">
+            <div class="space-y-6">
               {#each workflowState.results as resultId}
                 {@const result = workflowResults.find(r => r.id === resultId)}
                 {#if result}
-                  <div class="alert alert-info">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
-                    </svg>
-                    <div class="text-left">
-                      <h3 class="font-bold">{$t(result.titleKey as any)}</h3>
-                      <p class="text-sm">{$t(result.descriptionKey as any)}</p>
+                  <div class="card bg-base-200 shadow-lg">
+                    <div class="card-body">
+                      <h3 class="card-title text-xl text-primary mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.847a4.5 4.5 0 003.09 3.09L15.75 12l-2.847.813a4.5 4.5 0 00-3.09 3.09z" />
+                        </svg>
+                        {$t(result.titleKey as any)}
+                      </h3>
+                      
+                      <p class="text-base-content/80 mb-4 leading-relaxed">
+                        {$t(result.descriptionKey as any)}
+                      </p>
+                      
+                      <div class="grid md:grid-cols-2 gap-4">
+                        <div class="bg-base-100 p-4 rounded-lg">
+                          <h4 class="font-semibold text-secondary mb-2 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z" />
+                            </svg>
+                            {$t('keyTechniques')}
+                          </h4>
+                          <p class="text-sm text-base-content/70">
+                            {$t(result.techniquesKey as any)}
+                          </p>
+                        </div>
+                        
+                        <div class="bg-base-100 p-4 rounded-lg">
+                          <h4 class="font-semibold text-accent mb-2 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            {$t('benefits')}
+                          </h4>
+                          <p class="text-sm text-base-content/70">
+                            {$t(result.benefitsKey as any)}
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 {/if}
@@ -206,15 +222,13 @@
               <h3 class="font-bold mb-3">{$t('yourAnswers')}</h3>
               <div class="space-y-2 text-sm">
                 {#each workflowState.answers as answer, index}
+                  {@const questionId = (answer as any).questionId}
+                  {@const question = workflowQuestions.find(q => q.id === questionId)}
+                  {@const selectedOption = question?.options.find(opt => opt.value === (answer as any).answer)}
                   <div class="flex justify-between">
                     <span class="text-base-content/70">{$t('question')} {index + 1}:</span>
                     <span class="font-medium">
-                      {#if (answer as any).answer === 'yes'}{$t('yes')}
-                      {:else if (answer as any).answer === 'no'}{$t('no')}
-                      {:else if (answer as any).answer === 'both'}{$t('both')}
-                      {:else if (answer as any).answer === 'option-a'}{$t('question2OptionA')}
-                      {:else if (answer as any).answer === 'option-b'}{$t('question2OptionB')}
-                      {/if}
+                      {selectedOption ? $t(selectedOption.key as any) : (answer as any).answer}
                     </span>
                   </div>
                 {/each}
@@ -252,28 +266,7 @@
             
             <!-- Answer Options -->
             <div class="space-y-3">
-              {#if currentQuestion.type === 'yes-no'}
-                <button 
-                  class="btn btn-outline btn-lg w-full justify-start"
-                  onclick={() => answerQuestion('yes')}
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mr-3">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  {$t('yes')}
-                </button>
-                
-                <button 
-                  class="btn btn-outline btn-lg w-full justify-start"
-                  onclick={() => answerQuestion('no')}
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mr-3">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                  {$t('no')}
-                </button>
-                
-              {:else if currentQuestion.type === 'multiple-choice' && currentQuestion.options}
+              {#if currentQuestion.type === 'multiple-choice' && currentQuestion.options}
                 {#each currentQuestion.options as option}
                   <button 
                     class="btn btn-outline btn-lg w-full justify-start text-left"

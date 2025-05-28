@@ -98,26 +98,60 @@ const translations = {
     yourAnswers: 'Your Answers',
     recommendedMethodology: 'Recommended Methodology',
     workflowComplete: 'Workflow Complete',
-    progress: 'Progress',
     
     // Workflow Questions
-    question1: 'Do you have a large dataset available for training?',
-    question2: 'What is your primary focus?',
-    question2OptionA: 'Computational efficiency',
-    question2OptionB: 'Model quality',
-    question2OptionBoth: 'Both equally important',
-    question3: 'Do you have limited computational resources?',
-    question4: 'Do you need the highest possible model quality?',
+    question1: 'What is the size of your available dataset?',
+    question1OptionA: 'Small (< 1M examples)',
+    question1OptionB: 'Medium (1M - 100M examples)',
+    question1OptionC: 'Large (> 100M examples)',
+    
+    question2: 'What are your computational resource constraints?',
+    question2OptionA: 'Limited (single GPU or small cluster)',
+    question2OptionB: 'Moderate (multiple GPUs)',
+    question2OptionC: 'Extensive (large cluster or cloud resources)',
+    
+    question3: 'What is your primary training objective?',
+    question3OptionA: 'Fine-tuning for specific tasks',
+    question3OptionB: 'Pre-training from scratch',
+    question3OptionC: 'Domain adaptation',
+    
+    question4: 'What is your priority regarding training time vs model quality?',
+    question4OptionA: 'Fast training (accept lower quality)',
+    question4OptionB: 'Balanced approach',
+    question4OptionC: 'Maximum quality (longer training acceptable)',
     
     // Workflow Results
-    result1Title: 'Traditional Training Methodology',
-    result1Description: 'Based on your answers, we recommend using traditional training methodologies with your large dataset. This approach will provide solid results with proven techniques.',
-    result2Title: 'Efficient Training Methodology',
-    result2Description: 'Given your focus on computational efficiency, we recommend using optimization techniques such as gradient checkpointing, mixed precision training, and efficient data loading strategies.',
-    result3Title: 'Quality-Focused Methodology',
-    result3Description: 'For maximum model quality, we recommend using advanced techniques such as curriculum learning, sophisticated regularization, and careful hyperparameter tuning.',
-    result2And3Title: 'Hybrid Methodology',
-    result2And3Description: 'Since you need both efficiency and quality, we recommend a balanced approach combining optimization techniques with quality-enhancing methods, carefully balancing computational cost and model performance.',
+    efficientFinetuningTitle: 'Efficient Fine-tuning Methodology',
+    efficientFinetuningDescription: 'Recommended for your scenario with limited resources and small datasets. Use Parameter-Efficient Fine-Tuning (PEFT) techniques like LoRA, Adapters, or Prompt Tuning. These methods require minimal computational resources while maintaining good performance.',
+    efficientFinetuningTechniques: 'Key Techniques: LoRA (Low-Rank Adaptation), Adapters, Prompt Tuning, Gradient Checkpointing',
+    efficientFinetuningBenefits: 'Benefits: Low memory usage, fast training, minimal parameter updates, good transfer learning',
+    
+    standardFinetuningTitle: 'Standard Fine-tuning Methodology',
+    standardFinetuningDescription: 'Suitable for medium-sized datasets with moderate computational resources. Use full fine-tuning with optimization techniques like mixed precision training and gradient accumulation.',
+    standardFinetuningTechniques: 'Key Techniques: Full Fine-tuning, Mixed Precision (FP16/BF16), Gradient Accumulation, Learning Rate Scheduling',
+    standardFinetuningBenefits: 'Benefits: Good balance between performance and efficiency, proven techniques, flexible optimization',
+    
+    distributedTrainingTitle: 'Distributed Training Methodology',
+    distributedTrainingDescription: 'Optimal for large datasets and extensive computational resources. Implement data and model parallelism with advanced optimization techniques for maximum performance.',
+    distributedTrainingTechniques: 'Key Techniques: Data Parallelism, Model Parallelism, Pipeline Parallelism, ZeRO Optimizer, DeepSpeed',
+    distributedTrainingBenefits: 'Benefits: Handles large models and datasets, scalable training, state-of-the-art performance',
+    
+    domainAdaptationTitle: 'Domain Adaptation Methodology',
+    domainAdaptationDescription: 'Specialized approach for adapting pre-trained models to specific domains. Combines continued pre-training with targeted fine-tuning strategies.',
+    domainAdaptationTechniques: 'Key Techniques: Continued Pre-training, Domain-specific Tokenization, Curriculum Learning, Progressive Training',
+    domainAdaptationBenefits: 'Benefits: Domain-specific performance, efficient knowledge transfer, reduced training time',
+    
+    hybridApproachTitle: 'Hybrid Training Methodology',
+    hybridApproachDescription: 'A balanced approach combining multiple techniques based on your specific requirements. Adapts training strategy based on available resources and quality requirements.',
+    hybridApproachTechniques: 'Key Techniques: Multi-stage Training, Adaptive Optimization, Resource-aware Scheduling, Quality Monitoring',
+    hybridApproachBenefits: 'Benefits: Flexible approach, optimized resource usage, balanced performance-efficiency trade-off',
+    
+    // Additional workflow terms
+    keyTechniques: 'Key Techniques',
+    benefits: 'Benefits',
+    recommendedFor: 'Recommended For',
+    implementationSteps: 'Implementation Steps',
+    step: 'Step',
 
     // Footer
     masterCCDegree: 'Master\'s Degree in Computer Science',
@@ -216,26 +250,60 @@ const translations = {
     yourAnswers: 'Suas Respostas',
     recommendedMethodology: 'Metodologia Recomendada',
     workflowComplete: 'Workflow Completo',
-    progress: 'Progresso',
     
     // Workflow Questions
-    question1: 'Você possui um grande dataset disponível para treinamento?',
-    question2: 'Qual é seu foco principal?',
-    question2OptionA: 'Eficiência computacional',
-    question2OptionB: 'Qualidade do modelo',
-    question2OptionBoth: 'Ambos igualmente importantes',
-    question3: 'Você possui recursos computacionais limitados?',
-    question4: 'Você precisa da maior qualidade possível do modelo?',
+    question1: 'Qual é o tamanho do seu dataset disponível?',
+    question1OptionA: 'Pequeno (< 1M exemplos)',
+    question1OptionB: 'Médio (1M - 100M exemplos)',
+    question1OptionC: 'Grande (> 100M exemplos)',
+    
+    question2: 'Quais são suas restrições de recursos computacionais?',
+    question2OptionA: 'Limitado (um único GPU ou pequeno cluster)',
+    question2OptionB: 'Moderado (múltiplos GPUs)',
+    question2OptionC: 'Extenso (grande cluster ou recursos de nuvem)',
+    
+    question3: 'Qual é seu objetivo principal de treinamento?',
+    question3OptionA: 'Fine-tuning para tarefas específicas',
+    question3OptionB: 'Pré-treinamento do zero',
+    question3OptionC: 'Adaptação de domínio',
+    
+    question4: 'Qual é sua prioridade em relação ao tempo de treinamento vs qualidade do modelo?',
+    question4OptionA: 'Treinamento rápido (aceitar menor qualidade)',
+    question4OptionB: 'Abordagem equilibrada',
+    question4OptionC: 'Qualidade máxima (treinamento mais longo aceitável)',
     
     // Workflow Results
-    result1Title: 'Metodologia de Treinamento Tradicional',
-    result1Description: 'Com base em suas respostas, recomendamos usar metodologias de treinamento tradicionais com seu grande dataset. Esta abordagem fornecerá resultados sólidos com técnicas comprovadas.',
-    result2Title: 'Metodologia de Treinamento Eficiente',
-    result2Description: 'Dado seu foco em eficiência computacional, recomendamos usar técnicas de otimização como gradient checkpointing, treinamento de precisão mista e estratégias eficientes de carregamento de dados.',
-    result3Title: 'Metodologia Focada em Qualidade',
-    result3Description: 'Para máxima qualidade do modelo, recomendamos usar técnicas avançadas como curriculum learning, regularização sofisticada e ajuste cuidadoso de hiperparâmetros.',
-    result2And3Title: 'Metodologia Híbrida',
-    result2And3Description: 'Como você precisa tanto de eficiência quanto qualidade, recomendamos uma abordagem balanceada combinando técnicas de otimização com métodos que melhoram a qualidade, equilibrando cuidadosamente custo computacional e performance do modelo.',
+    efficientFinetuningTitle: 'Metodologia de Fine-tuning Eficiente',
+    efficientFinetuningDescription: 'Recomendada para seu cenário com recursos limitados e pequenos datasets. Use técnicas de Fine-Tuning de Parâmetro Eficiente (PEFT) como LoRA, Adaptadores, ou Ajuste de Prompt. Esses métodos requerem recursos computacionais mínimos enquanto mantêm boa performance.',
+    efficientFinetuningTechniques: 'Técnicas Principais: LoRA (Adaptação de Baixo Rank), Adaptadores, Ajuste de Prompt, Gradient Checkpointing',
+    efficientFinetuningBenefits: 'Benefícios: Baixo uso de memória, treinamento rápido, atualizações mínimas de parâmetros, boa transferência de aprendizado',
+    
+    standardFinetuningTitle: 'Metodologia de Fine-tuning Padrão',
+    standardFinetuningDescription: 'Adequada para datasets de tamanho médio com recursos computacionais moderados. Use fine-tuning completo com técnicas de otimização como treinamento de precisão mista e acumulação de gradiente.',
+    standardFinetuningTechniques: 'Técnicas Principais: Fine-tuning Completo, Precisão Mista (FP16/BF16), Acumulação de Gradiente, Agendamento de Taxa de Aprendizado',
+    standardFinetuningBenefits: 'Benefícios: Bom equilíbrio entre performance e eficiência, técnicas comprovadas, otimização flexível',
+    
+    distributedTrainingTitle: 'Metodologia de Treinamento Distribuído',
+    distributedTrainingDescription: 'Ideal para grandes datasets e recursos computacionais extensos. Implemente paralelismo de dados e modelo com técnicas avançadas de otimização para máxima performance.',
+    distributedTrainingTechniques: 'Técnicas Principais: Paralelismo de Dados, Paralelismo de Modelo, Paralelismo de Pipeline, Otimizador ZeRO, DeepSpeed',
+    distributedTrainingBenefits: 'Benefícios: Lida com modelos e datasets grandes, treinamento escalável, performance estado-da-arte',
+    
+    domainAdaptationTitle: 'Metodologia de Adaptação de Domínio',
+    domainAdaptationDescription: 'Abordagem especializada para adaptar modelos pré-treinados a domínios específicos. Combina pré-treinamento continuado com estratégias de fine-tuning direcionadas.',
+    domainAdaptationTechniques: 'Técnicas Principais: Pré-treinamento Continuado, Tokenização Específica de Domínio, Aprendizado Curricular, Treinamento Progressivo',
+    domainAdaptationBenefits: 'Benefícios: Performance específica de domínio, transferência eficiente de conhecimento, tempo de treinamento reduzido',
+    
+    hybridApproachTitle: 'Metodologia de Treinamento Híbrida',
+    hybridApproachDescription: 'Uma abordagem equilibrada combinando múltiplas técnicas baseadas em seus requisitos específicos. Adapta estratégia de treinamento baseada em recursos disponíveis e requisitos de qualidade.',
+    hybridApproachTechniques: 'Técnicas Principais: Treinamento Multi-estágio, Otimização Adaptativa, Agendamento Consciente de Recursos, Monitoramento de Qualidade',
+    hybridApproachBenefits: 'Benefícios: Abordagem flexível, uso otimizado de recursos, equilíbrio performance-eficiência',
+    
+    // Additional workflow terms
+    keyTechniques: 'Técnicas Principais',
+    benefits: 'Benefícios',
+    recommendedFor: 'Recomendado Para',
+    implementationSteps: 'Passos de Implementação',
+    step: 'Passo',
 
     // Footer
     masterCCDegree: 'Mestrado em Ciência da Computação',

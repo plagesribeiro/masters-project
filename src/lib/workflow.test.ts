@@ -6,37 +6,54 @@ function testWorkflow() {
   
   const engine = new WorkflowEngine();
   
-  // Teste 1: Pergunta 1 = Sim -> Resultado 1
-  console.log('\n--- Teste 1: Q1=Sim ---');
-  let state = engine.answerQuestion('q1', 'yes');
+  // Teste 1: Dataset pequeno + Recursos limitados -> Efficient Fine-tuning
+  console.log('\n--- Teste 1: Dataset pequeno + Recursos limitados ---');
+  engine.answerQuestion('q1', 'option-a'); // Dataset pequeno
+  engine.answerQuestion('q2', 'option-a'); // Recursos limitados
+  engine.answerQuestion('q3', 'option-a'); // Fine-tuning
+  let state = engine.answerQuestion('q4', 'option-b'); // Abordagem equilibrada
   console.log('Complete:', state.isComplete);
   console.log('Results:', state.results);
-  console.log('Expected: ["result1"]');
+  console.log('Expected: ["efficientFinetuning"]');
   
   // Reinicia para próximo teste
   engine.restart();
   
-  // Teste 2: Q1=Não, Q2=Eficiência, Q3=Sim -> Resultado 2
-  console.log('\n--- Teste 2: Q1=Não, Q2=Eficiência, Q3=Sim ---');
-  engine.answerQuestion('q1', 'no');
-  engine.answerQuestion('q2', 'option-a');
-  state = engine.answerQuestion('q3', 'yes');
+  // Teste 2: Dataset grande + Recursos extensos -> Distributed Training
+  console.log('\n--- Teste 2: Dataset grande + Recursos extensos ---');
+  engine.answerQuestion('q1', 'option-c'); // Dataset grande
+  engine.answerQuestion('q2', 'option-c'); // Recursos extensos
+  engine.answerQuestion('q3', 'option-b'); // Pré-treinamento
+  state = engine.answerQuestion('q4', 'option-c'); // Qualidade máxima
   console.log('Complete:', state.isComplete);
   console.log('Results:', state.results);
-  console.log('Expected: ["result2"]');
+  console.log('Expected: ["distributedTraining"]');
   
   // Reinicia para próximo teste
   engine.restart();
   
-  // Teste 3: Q1=Não, Q2=Ambos, Q3=Sim, Q4=Sim -> Resultado Híbrido
-  console.log('\n--- Teste 3: Q1=Não, Q2=Ambos, Q3=Sim, Q4=Sim ---');
-  engine.answerQuestion('q1', 'no');
-  engine.answerQuestion('q2', 'both');
-  engine.answerQuestion('q3', 'yes');
-  state = engine.answerQuestion('q4', 'yes');
+  // Teste 3: Adaptação de domínio -> Domain Adaptation
+  console.log('\n--- Teste 3: Adaptação de domínio ---');
+  engine.answerQuestion('q1', 'option-b'); // Dataset médio
+  engine.answerQuestion('q2', 'option-b'); // Recursos moderados
+  engine.answerQuestion('q3', 'option-c'); // Adaptação de domínio
+  state = engine.answerQuestion('q4', 'option-b'); // Abordagem equilibrada
   console.log('Complete:', state.isComplete);
   console.log('Results:', state.results);
-  console.log('Expected: ["result2and3"]');
+  console.log('Expected: ["domainAdaptation"]');
+  
+  // Reinicia para próximo teste
+  engine.restart();
+  
+  // Teste 4: Abordagem híbrida
+  console.log('\n--- Teste 4: Abordagem híbrida ---');
+  engine.answerQuestion('q1', 'option-b'); // Dataset médio
+  engine.answerQuestion('q2', 'option-b'); // Recursos moderados
+  engine.answerQuestion('q3', 'option-a'); // Fine-tuning
+  state = engine.answerQuestion('q4', 'option-b'); // Abordagem equilibrada
+  console.log('Complete:', state.isComplete);
+  console.log('Results:', state.results);
+  console.log('Expected: ["hybridApproach"]');
   
   console.log('\nTodos os testes concluídos!');
 }
