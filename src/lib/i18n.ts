@@ -15,19 +15,19 @@ const translations = {
     // Home page
     masterDefense: 'Master\'s Defense',
     llmTraining: 'LLM Training',
-    homeSubtitle: 'Explore advanced methodologies and practical tools for efficient training of Large Language Models. A journey through innovative techniques and real applications.',
+    homeSubtitle: 'Explore advanced methodologies and practical tools for efficient training of Large Language Models. A journey through innovative techniques and real-world applications.',
     exploreResearch: 'Explore Research',
     academicPublication: 'Academic Publication',
     paperTitle: 'Advanced Methodologies for Efficient Training of Large Language Models',
-    paperDescription: 'This research presents innovative techniques for optimizing the training process of large-scale language models, focusing on computational efficiency and quality of obtained results.',
+    paperDescription: 'This research presents innovative techniques for optimizing the training process of large-scale language models, focusing on computational efficiency and quality of results obtained.',
     downloadPdf: 'Download PDF',
     viewOnline: 'View Online',
     
     // Explore page
     exploreTitle: 'Explore',
-    exploreSubtitle: 'Discover interactive tools to explore LLM training methodologies and get your questions answered through specialized AI.',
-    aiChatTitle: 'AI Specialized Chat',
-    aiChatDescription: 'Chat with an AI trained specifically on the master\'s thesis content. Ask questions, explore concepts and get detailed explanations about the LLM training methodologies presented in the research.',
+    exploreSubtitle: 'Discover interactive tools to explore LLM training methodologies and ask questions about the research through specialized AI.',
+    aiChatTitle: 'Specialized AI Chat',
+    aiChatDescription: 'Chat with an AI trained specifically on the content of the master\'s thesis. Ask questions, explore concepts, and get detailed explanations about the LLM training methodologies presented in the research.',
     methodologyTitle: 'Execute Methodology',
     methodologyDescription: 'Execute training methodologies through a guided interactive workflow. Answer sequential questions that direct you to the most suitable methodology for your specific case, with personalized results.',
     startChat: 'Start Chat',
@@ -72,11 +72,11 @@ const translations = {
     toyExample3Features: 'Dataset preparation, LoRA techniques, training monitoring, behavior adaptation',
     
     toyExample4Title: 'RAG + Fine-Tuning',
-    toyExample4Description: 'Combine both main strategies for cases requiring behavior learning and access to updated contextual information.',
+    toyExample4Description: 'Combine the two main strategies for cases that require behavior learning and access to updated contextual information.',
     toyExample4Features: 'Hybrid architecture, integrated pipeline, maximum adaptability, complete solution',
     
     // Chat interface
-    aiSpecialist: 'AI Specialist',
+    aiSpecialist: 'Specialized AI',
     specialistDescription: 'Expert in LLM training methodologies',
     online: 'Online',
     you: 'You',
@@ -85,7 +85,7 @@ const translations = {
     send: 'send',
     newLine: 'new line',
     chatPlaceholder: 'Type your question about LLM training methodologies...',
-    welcomeMessage: 'Hello! I am an AI specialized in the master\'s thesis on LLM training methodologies. How can I help you today?',
+    welcomeMessage: 'Hello! I\'m an AI specialized in the master\'s thesis on LLM training methodologies. How can I help you today?',
     chatCleared: 'Chat cleared! How can I help you?',
     
     // Errors
@@ -116,8 +116,8 @@ const translations = {
     recommendedMethodology: 'Recommended Methodology',
     workflowComplete: 'Workflow Complete',
     
-    // Workflow Questions - Baseadas na metodologia do artigo
-    question1: 'Does the amount of available data make it unfeasible to insert it directly into the prompt?',
+    // Workflow Questions - Based on the article methodology
+    question1: 'Does the amount of available data make its direct insertion into the prompt unfeasible?',
     question1OptionA: 'No (data can be inserted directly into the prompt)',
     question1OptionB: 'Yes (data volume exceeds model context limits)',
     
@@ -126,41 +126,41 @@ const translations = {
     question2OptionB: 'Teach new behaviors to the model',
     question2OptionC: 'Both - provide context and teach new behaviors',
     
-    question3: 'Is it feasible to build or integrate an external retrieval mechanism (RAG) with the available data?',
-    question3OptionA: 'Yes, it is possible to implement or there is already a RAG mechanism',
-    question3OptionB: 'No, it is not possible to build or integrate a RAG mechanism',
+    question3: 'Is it viable to build or integrate an external retrieval mechanism (RAG) with the available data?',
+    question3OptionA: 'Yes, it\'s possible to implement or a RAG mechanism already exists',
+    question3OptionB: 'No, it\'s not possible to build or integrate a RAG mechanism',
     
-    question4: 'Is there a specialized, organized and quality dataset sufficient to perform Fine-Tuning?',
-    question4OptionA: 'Yes, the available data meets the requirements',
-    question4OptionB: 'No, the data is not sufficient or not prepared',
+    question4: 'Is there a specialized, organized, and sufficiently quality dataset to perform Fine-Tuning?',
+    question4OptionA: 'Yes, available data meets requirements',
+    question4OptionB: 'No, data is not sufficient or not prepared',
     
-    question5: 'Is the latency of the RAG mechanism acceptable for the context of use?',
+    question5: 'Is the RAG mechanism latency acceptable for the usage context?',
     question5OptionA: 'Yes, latency is compatible with system requirements',
     question5OptionB: 'No, latency is too high for operational requirements',
     
     question6: 'Is there computational and financial availability to perform Fine-Tuning with the available data?',
-    question6OptionA: 'Yes, there are sufficient resources (or it is possible to apply an efficient approach)',
+    question6OptionA: 'Yes, there are sufficient resources (or it\'s possible to apply an efficient approach)',
     question6OptionB: 'No, there are no adequate resources for Fine-Tuning',
     
-    // Workflow Results - Baseados na metodologia do artigo
+    // Workflow Results - Based on the article methodology
     intermediateApproachesTitle: 'Intermediate Approaches',
-    intermediateApproachesDescription: 'Since the data volume allows direct insertion into the prompt, you can use lightweight adaptation techniques that do not require complex model modifications. These approaches are efficient and computationally inexpensive.',
-    intermediateApproachesTechniques: 'Key Techniques: Few-Shot Learning, Prompt Engineering, Chain of Thought (CoT), Agent-based Architectures',
-    intermediateApproachesBenefits: 'Benefits: Low computational cost, fast implementation, flexibility, no need for re-training',
+    intermediateApproachesDescription: 'Since the data volume allows direct insertion into the prompt, you can use lightweight adaptation techniques that don\'t require complex model modifications. These approaches are efficient and computationally low-cost.',
+    intermediateApproachesTechniques: 'Main Techniques: Few-Shot Learning, Prompt Engineering, Chain of Thought (CoT), Agent-based architectures',
+    intermediateApproachesBenefits: 'Benefits: Low computational cost, fast implementation, flexibility, no need for retraining',
     
     fineTuningTitle: 'Fine-Tuning',
-    fineTuningDescription: 'Recommended strategy for teaching new behaviors to the model through parametric adjustment. Fine-Tuning reconfigures the internal weights of the model based on the provided data, allowing learning of new response patterns.',
-    fineTuningTechniques: 'Key Techniques: Full Fine-Tuning, LoRA (Low-Rank Adaptation), Prefix-Tuning, Adapters, BitFit',
-    fineTuningBenefits: 'Benefits: Permanent learning of behaviors, deep personalization, high quality in specific domains',
+    fineTuningDescription: 'Recommended strategy for teaching new behaviors to the model through parametric adjustment. Fine-Tuning reconfigures the internal weights of the model based on provided data, enabling learning of new response patterns.',
+    fineTuningTechniques: 'Main Techniques: Full Fine-Tuning, LoRA (Low-Rank Adaptation), Prefix-Tuning, Adapters, BitFit',
+    fineTuningBenefits: 'Benefits: Permanent behavior learning, deep personalization, high quality in specific domains',
     
     ragTitle: 'RAG (Retrieval-Augmented Generation)',
     ragDescription: 'Ideal approach for providing updated contextual information to the model without modifying its parameters. RAG combines text generation with external information retrieval in real time.',
-    ragTechniques: 'Key Techniques: Vector Search, Semantic Embeddings, Document Indexing, Retrieval APIs, Vector Databases',
-    ragBenefits: 'Benefits: Always updated information, no re-training, source flexibility, low maintenance cost',
+    ragTechniques: 'Main Techniques: Vector Search, Semantic Embeddings, Document Indexing, Retrieval APIs, Vector Databases',
+    ragBenefits: 'Benefits: Always updated information, no retraining, source flexibility, low maintenance cost',
     
     hybridApproachTitle: 'Fine-Tuning + RAG (Hybrid Approach)',
-    hybridApproachDescription: 'Combination of the two main strategies for cases that require both learning new behaviors and access to updated contextual information. Fine-Tuning shapes general behavior while RAG provides dynamic data.',
-    hybridApproachTechniques: 'Key Techniques: Fine-Tuning for behavior + RAG for context, Integrated pipeline, Modular architecture',
+    hybridApproachDescription: 'Combination of the two main strategies for cases requiring both learning new behaviors and access to updated contextual information. Fine-Tuning shapes general behavior while RAG provides dynamic data.',
+    hybridApproachTechniques: 'Main Techniques: Fine-Tuning for behavior + RAG for context, Integrated pipeline, Modular architecture',
     hybridApproachBenefits: 'Benefits: Maximum adaptability, personalized behavior with updated data, complete solution',
     
     // Additional workflow terms
@@ -171,8 +171,8 @@ const translations = {
     step: 'Step',
 
     // Footer
-    masterCCDegree: 'Master\'s Degree in Computer Science',
-    ofPUCMinas: 'at PUC Minas',
+    masterCCDegree: 'Master\'s in Computer Science',
+    ofPUCMinas: 'from PUC Minas',
 
     // Status labels
     comingSoon: 'Coming Soon',
@@ -181,36 +181,36 @@ const translations = {
     features: 'Features',
     developmentInProgress: 'Development in progress',
     newExamplesInDevelopment: 'New examples in development!',
-    examplesComingSoonMessage: 'Fine-Tuning and RAG + Fine-Tuning examples will be available soon. Follow the project updates.',
+    examplesComingSoonMessage: 'Fine-Tuning and RAG + Fine-Tuning examples will be available soon. Follow project updates.',
 
     // Toy Examples Chat
-    alternativeApproachesChat: 'Chat de Abordagens Alternativas',
-    ragChat: 'Chat de Implementação RAG',
-    aboutExample: 'Sobre este Exemplo',
-    backToExample: 'Voltar ao Exemplo',
-    implementation: 'Implementação',
-    requirements: 'Requisitos',
-    methodologyAnswers: 'Respostas da Metodologia',
+    alternativeApproachesChat: 'Alternative Approaches Chat',
+    ragChat: 'RAG Implementation Chat',
+    aboutExample: 'About this Example',
+    backToExample: 'Back to Example',
+    implementation: 'Implementation',
+    requirements: 'Requirements',
+    methodologyAnswers: 'Methodology Answers',
     
     // Alternative Approaches
-    altApproachesWelcome: 'Olá! Sou especializada em Abordagens Alternativas para adaptação de LLM. Uso técnicas de Few-Shot Learning e Prompt Engineering. Como posso ajudá-lo?',
-    altApproachesDescription: 'Este exemplo demonstra técnicas de adaptação leve que não requerem modificações no modelo.',
-    altApproachesImpl: 'A implementação usa estratégias avançadas de prompting como Few-Shot Learning, Chain of Thought e gerenciamento dinâmico de contexto.',
-    altApproachesReq: 'Volume pequeno de dados, inserção direta no prompt viável, foco em fornecer informações contextuais.',
+    altApproachesWelcome: 'Hello! I\'m specialized in Alternative Approaches for LLM adaptation. I use Few-Shot Learning and Prompt Engineering techniques. How can I help you?',
+    altApproachesDescription: 'This example demonstrates lightweight adaptation techniques that don\'t require model modifications.',
+    altApproachesImpl: 'The implementation uses advanced prompting strategies like Few-Shot Learning, Chain of Thought, and dynamic context management.',
+    altApproachesReq: 'Small data volume, direct prompt insertion viable, focus on providing contextual information.',
     
     // RAG Implementation  
-    ragWelcome: 'Olá! Sou especializada em RAG (Retrieval-Augmented Generation). Posso buscar conhecimento externo e fornecer informações atualizadas. Como posso ajudá-lo?',
-    ragDescription: 'Este exemplo demonstra um sistema RAG completo com capacidades de busca vetorial e recuperação semântica.',
-    ragImpl: 'A implementação usa embeddings vetoriais, busca semântica, indexação de documentos e recuperação de informações em tempo real.',
-    ragReq: 'Volume grande de dados, mecanismo de recuperação externa viável, foco em fornecer informações contextuais atualizadas.',
+    ragWelcome: 'Hello! I\'m specialized in RAG (Retrieval-Augmented Generation). I can search external knowledge and provide updated information. How can I help you?',
+    ragImplDescription: 'This example demonstrates a complete RAG system with vector search and semantic retrieval capabilities.',
+    ragImpl: 'The implementation uses vector embeddings, semantic search, document indexing, and real-time information retrieval.',
+    ragReq: 'Large data volume, viable external retrieval mechanism, focus on providing updated contextual information.',
     
     // Methodology Questions and Answers
-    question1Answer: 'Resposta da Pergunta 1',
-    question2Answer: 'Resposta da Pergunta 2',
-    question3Answer: 'Resposta da Pergunta 3',
-    question4Answer: 'Resposta da Pergunta 4',
-    question5Answer: 'Resposta da Pergunta 5',
-    question6Answer: 'Resposta da Pergunta 6',
+    question1Answer: 'Answer to Question 1',
+    question2Answer: 'Answer to Question 2',
+    question3Answer: 'Answer to Question 3',
+    question4Answer: 'Answer to Question 4',
+    question5Answer: 'Answer to Question 5',
+    question6Answer: 'Answer to Question 6',
   },
   pt: {
     // Navigation
@@ -407,7 +407,7 @@ const translations = {
     
     // RAG Implementation  
     ragWelcome: 'Olá! Sou especializada em RAG (Retrieval-Augmented Generation). Posso buscar conhecimento externo e fornecer informações atualizadas. Como posso ajudá-lo?',
-    ragDescription: 'Este exemplo demonstra um sistema RAG completo com capacidades de busca vetorial e recuperação semântica.',
+    ragImplDescription: 'Este exemplo demonstra um sistema RAG completo com capacidades de busca vetorial e recuperação semântica.',
     ragImpl: 'A implementação usa embeddings vetoriais, busca semântica, indexação de documentos e recuperação de informações em tempo real.',
     ragReq: 'Volume grande de dados, mecanismo de recuperação externa viável, foco em fornecer informações contextuais atualizadas.',
     

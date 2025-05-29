@@ -9,7 +9,7 @@
   const dispatch = createEventDispatcher();
   
   let toastElement: HTMLDivElement;
-  let timeoutId: number | undefined;
+  let timeoutId: ReturnType<typeof setTimeout> | undefined;
   
   $: if (visible) {
     showToast();

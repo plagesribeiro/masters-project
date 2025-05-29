@@ -26,9 +26,16 @@
 		]
 	},
 	"dependencies": {
+		"@langchain/community": "^0.3.45",
+		"@langchain/core": "^0.3.57",
+		"@langchain/langgraph": "^0.2.74",
+		"@langchain/openai": "^0.5.11",
 		"@tailwindcss/vite": "^4.1.7",
 		"daisyui": "^5.0.38",
+		"langfuse": "^3.37.3",
+		"langfuse-langchain": "^3.37.3",
 		"marked": "^15.0.12",
-		"tailwindcss": "^4.1.7"
+		"tailwindcss": "^4.1.7",
+		"zod": "^3.25.34"
 	}
 }
