@@ -21,7 +21,8 @@
         <li><a href="https://1drv.ms/f/c/7075a1ac85c5536d/EiVohgvkV0dHov3GEVlRzFEBhS56qSAs5Mbf3mSSk0PRmA?e=vied8c" target="_blank" class="hover:text-primary">{$t('paper')}</a></li>
       </ul>
     </div>
-    <a href="/" class="btn btn-ghost text-xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+    
+    <a href="/" class=" hidden sm:flex btn btn-ghost text-xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
       LLM Training Helper
     </a>
   </div>

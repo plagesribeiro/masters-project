@@ -58,6 +58,23 @@ const translations = {
     toyExamplesSubtitle: 'Practical and interactive examples demonstrating language model training techniques in simplified cases.',
     pageInDevelopment: 'Page under development...',
     
+    // Toy Examples Items
+    toyExample1Title: 'Alternative Approaches',
+    toyExample1Description: 'Explore lightweight adaptation techniques that don\'t require complex model modifications, such as Few-Shot Learning and Prompt Engineering.',
+    toyExample1Features: 'Few-Shot Learning, Prompt Engineering, Chain of Thought (CoT), Agent-based architectures',
+    
+    toyExample2Title: 'RAG Implementation',
+    toyExample2Description: 'Build a Retrieval-Augmented Generation system to provide updated contextual information without modifying model parameters.',
+    toyExample2Features: 'Vector search, semantic embeddings, document indexing, real-time information retrieval',
+    
+    toyExample3Title: 'Fine-Tuning',
+    toyExample3Description: 'Experience the fine-tuning process to teach new behaviors to the model through parametric adjustment.',
+    toyExample3Features: 'Dataset preparation, LoRA techniques, training monitoring, behavior adaptation',
+    
+    toyExample4Title: 'RAG + Fine-Tuning',
+    toyExample4Description: 'Combine both main strategies for cases requiring behavior learning and access to updated contextual information.',
+    toyExample4Features: 'Hybrid architecture, integrated pipeline, maximum adaptability, complete solution',
+    
     // Chat interface
     aiSpecialist: 'AI Specialist',
     specialistDescription: 'Expert in LLM training methodologies',
@@ -155,7 +172,45 @@ const translations = {
 
     // Footer
     masterCCDegree: 'Master\'s Degree in Computer Science',
-    ofPUCMinas: 'at PUC Minas'
+    ofPUCMinas: 'at PUC Minas',
+
+    // Status labels
+    comingSoon: 'Coming Soon',
+    tryNow: 'Try Now',
+    learnMore: 'Learn More',
+    features: 'Features',
+    developmentInProgress: 'Development in progress',
+    newExamplesInDevelopment: 'New examples in development!',
+    examplesComingSoonMessage: 'Fine-Tuning and RAG + Fine-Tuning examples will be available soon. Follow the project updates.',
+
+    // Toy Examples Chat
+    alternativeApproachesChat: 'Chat de Abordagens Alternativas',
+    ragChat: 'Chat de Implementação RAG',
+    aboutExample: 'Sobre este Exemplo',
+    backToExample: 'Voltar ao Exemplo',
+    implementation: 'Implementação',
+    requirements: 'Requisitos',
+    methodologyAnswers: 'Respostas da Metodologia',
+    
+    // Alternative Approaches
+    altApproachesWelcome: 'Olá! Sou especializada em Abordagens Alternativas para adaptação de LLM. Uso técnicas de Few-Shot Learning e Prompt Engineering. Como posso ajudá-lo?',
+    altApproachesDescription: 'Este exemplo demonstra técnicas de adaptação leve que não requerem modificações no modelo.',
+    altApproachesImpl: 'A implementação usa estratégias avançadas de prompting como Few-Shot Learning, Chain of Thought e gerenciamento dinâmico de contexto.',
+    altApproachesReq: 'Volume pequeno de dados, inserção direta no prompt viável, foco em fornecer informações contextuais.',
+    
+    // RAG Implementation  
+    ragWelcome: 'Olá! Sou especializada em RAG (Retrieval-Augmented Generation). Posso buscar conhecimento externo e fornecer informações atualizadas. Como posso ajudá-lo?',
+    ragDescription: 'Este exemplo demonstra um sistema RAG completo com capacidades de busca vetorial e recuperação semântica.',
+    ragImpl: 'A implementação usa embeddings vetoriais, busca semântica, indexação de documentos e recuperação de informações em tempo real.',
+    ragReq: 'Volume grande de dados, mecanismo de recuperação externa viável, foco em fornecer informações contextuais atualizadas.',
+    
+    // Methodology Questions and Answers
+    question1Answer: 'Resposta da Pergunta 1',
+    question2Answer: 'Resposta da Pergunta 2',
+    question3Answer: 'Resposta da Pergunta 3',
+    question4Answer: 'Resposta da Pergunta 4',
+    question5Answer: 'Resposta da Pergunta 5',
+    question6Answer: 'Resposta da Pergunta 6',
   },
   pt: {
     // Navigation
@@ -209,6 +264,23 @@ const translations = {
     toyExamplesTitle: 'Exemplos Práticos',
     toyExamplesSubtitle: 'Exemplos práticos e interativos demonstrando técnicas de treinamento de modelos de linguagem em casos simplificados.',
     pageInDevelopment: 'Página em desenvolvimento...',
+    
+    // Toy Examples Items
+    toyExample1Title: 'Abordagens Alternativas',
+    toyExample1Description: 'Explore técnicas de adaptação leve que não requerem modificações complexas no modelo, como Few-Shot Learning e Prompt Engineering.',
+    toyExample1Features: 'Few-Shot Learning, Prompt Engineering, Chain of Thought (CoT), Arquiteturas baseadas em agentes',
+    
+    toyExample2Title: 'Implementação de RAG',
+    toyExample2Description: 'Construa um sistema de Retrieval-Augmented Generation para fornecer informações contextuais atualizadas sem modificar parâmetros do modelo.',
+    toyExample2Features: 'Busca vetorial, embeddings semânticos, indexação de documentos, recuperação de informações em tempo real',
+    
+    toyExample3Title: 'Fine-Tuning',
+    toyExample3Description: 'Experimente o processo de fine-tuning para ensinar novos comportamentos ao modelo através de ajuste paramétrico.',
+    toyExample3Features: 'Preparação de dataset, técnicas LoRA, monitoramento de treinamento, adaptação de comportamento',
+    
+    toyExample4Title: 'RAG + Fine-Tuning',
+    toyExample4Description: 'Combine as duas estratégias principais para casos que requerem aprendizado de comportamento e acesso a informações contextuais atualizadas.',
+    toyExample4Features: 'Arquitetura híbrida, pipeline integrado, adaptabilidade máxima, solução completa',
     
     // Chat interface
     aiSpecialist: 'IA Especializada',
@@ -307,7 +379,45 @@ const translations = {
 
     // Footer
     masterCCDegree: 'Mestrado em Ciência da Computação',
-    ofPUCMinas: 'da PUC Minas'
+    ofPUCMinas: 'da PUC Minas',
+
+    // Status labels
+    comingSoon: 'Em Breve',
+    tryNow: 'Experimente Agora',
+    learnMore: 'Saiba Mais',
+    features: 'Recursos',
+    developmentInProgress: 'Desenvolvimento em andamento',
+    newExamplesInDevelopment: 'Novos exemplos em desenvolvimento!',
+    examplesComingSoonMessage: 'Exemplos de Fine-Tuning e RAG + Fine-Tuning estarão disponíveis em breve. Siga as atualizações do projeto.',
+
+    // Toy Examples Chat
+    alternativeApproachesChat: 'Chat de Abordagens Alternativas',
+    ragChat: 'Chat de Implementação RAG',
+    aboutExample: 'Sobre este Exemplo',
+    backToExample: 'Voltar ao Exemplo',
+    implementation: 'Implementação',
+    requirements: 'Requisitos',
+    methodologyAnswers: 'Respostas da Metodologia',
+    
+    // Alternative Approaches
+    altApproachesWelcome: 'Olá! Sou especializada em Abordagens Alternativas para adaptação de LLM. Uso técnicas de Few-Shot Learning e Prompt Engineering. Como posso ajudá-lo?',
+    altApproachesDescription: 'Este exemplo demonstra técnicas de adaptação leve que não requerem modificações no modelo.',
+    altApproachesImpl: 'A implementação usa estratégias avançadas de prompting como Few-Shot Learning, Chain of Thought e gerenciamento dinâmico de contexto.',
+    altApproachesReq: 'Volume pequeno de dados, inserção direta no prompt viável, foco em fornecer informações contextuais.',
+    
+    // RAG Implementation  
+    ragWelcome: 'Olá! Sou especializada em RAG (Retrieval-Augmented Generation). Posso buscar conhecimento externo e fornecer informações atualizadas. Como posso ajudá-lo?',
+    ragDescription: 'Este exemplo demonstra um sistema RAG completo com capacidades de busca vetorial e recuperação semântica.',
+    ragImpl: 'A implementação usa embeddings vetoriais, busca semântica, indexação de documentos e recuperação de informações em tempo real.',
+    ragReq: 'Volume grande de dados, mecanismo de recuperação externa viável, foco em fornecer informações contextuais atualizadas.',
+    
+    // Methodology Questions and Answers
+    question1Answer: 'Resposta da Pergunta 1',
+    question2Answer: 'Resposta da Pergunta 2',
+    question3Answer: 'Resposta da Pergunta 3',
+    question4Answer: 'Resposta da Pergunta 4',
+    question5Answer: 'Resposta da Pergunta 5',
+    question6Answer: 'Resposta da Pergunta 6',
   }
 } as const;
 

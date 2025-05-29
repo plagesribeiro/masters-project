@@ -18,7 +18,7 @@
       </div>
       <div class="flex items-center gap-1 md:gap-3">
         <div class="badge badge-success gap-1 md:gap-2 shadow-sm text-xs">
-          <div class="w-1.5 h-1.5 md:w-2 md:h-2 bg-success rounded-full animate-pulse"></div>
+          <div class="w-1.5 h-1.5 md:w-2 md:h-2 bg-white rounded-full animate-pulse"></div>
           <span class="hidden sm:inline">{$t('online')}</span>
         </div>
       </div>
