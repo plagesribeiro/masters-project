@@ -2,7 +2,6 @@ import { ChatOpenAI } from '@langchain/openai';
 import { HumanMessage, AIMessage, BaseMessage } from '@langchain/core/messages';
 import { StringOutputParser } from '@langchain/core/output_parsers';
 import { ChatPromptTemplate } from '@langchain/core/prompts';
-import { CallbackHandler } from 'langfuse-langchain';
 import { LangfuseTracingService, type TracingConfig } from './tracing.js';
 
 export interface ChatMessage {

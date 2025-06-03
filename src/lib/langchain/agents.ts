@@ -4,7 +4,6 @@ import { tool } from '@langchain/core/tools';
 import { z } from 'zod';
 import { HumanMessage, AIMessage, SystemMessage } from '@langchain/core/messages';
 import { MemorySaver } from '@langchain/langgraph';
-import { CallbackHandler } from 'langfuse-langchain';
 import { LangfuseTracingService, type TracingConfig } from './tracing.js';
 import type { ChatMessage } from './service.js';
 

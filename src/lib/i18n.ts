@@ -59,9 +59,9 @@ const translations = {
     pageInDevelopment: 'Page under development...',
     
     // Toy Examples Items
-    toyExample1Title: 'Alternative Approaches',
-    toyExample1Description: 'Explore lightweight adaptation techniques that don\'t require complex model modifications, such as Few-Shot Learning and Prompt Engineering.',
-    toyExample1Features: 'Few-Shot Learning, Prompt Engineering, Chain of Thought (CoT), Agent-based architectures',
+    toyExample1Title: 'Custom Artifacts Store',
+    toyExample1Description: 'Interactive virtual store selling personalized products like mugs, t-shirts, frames, and more. Experience a seller agent using alternative approaches without complex modifications.',
+    toyExample1Features: 'Product catalog management, personalization validation, order processing, inventory control, interactive agent',
     
     toyExample2Title: 'RAG Implementation',
     toyExample2Description: 'Build a Retrieval-Augmented Generation system to provide updated contextual information without modifying model parameters.',
@@ -174,6 +174,10 @@ const translations = {
     masterCCDegree: 'Master\'s in Computer Science',
     ofPUCMinas: 'from PUC Minas',
 
+    // Theme Toggle
+    lightTheme: 'Light Theme',
+    darkTheme: 'Dark Theme',
+
     // Status labels
     comingSoon: 'Coming Soon',
     tryNow: 'Try Now',
@@ -266,9 +270,9 @@ const translations = {
     pageInDevelopment: 'Página em desenvolvimento...',
     
     // Toy Examples Items
-    toyExample1Title: 'Abordagens Alternativas',
-    toyExample1Description: 'Explore técnicas de adaptação leve que não requerem modificações complexas no modelo, como Few-Shot Learning e Prompt Engineering.',
-    toyExample1Features: 'Few-Shot Learning, Prompt Engineering, Chain of Thought (CoT), Arquiteturas baseadas em agentes',
+    toyExample1Title: 'Loja de Artefatos Personalizados',
+    toyExample1Description: 'Loja virtual interativa vendendo produtos personalizados como canecas, camisetas, quadros e muito mais. Experimente um agente vendedor usando abordagens alternativas sem modificações complexas.',
+    toyExample1Features: 'Gestão de catálogo de produtos, validação de personalização, processamento de pedidos, controle de estoque, agente interativo',
     
     toyExample2Title: 'Implementação de RAG',
     toyExample2Description: 'Construa um sistema de Retrieval-Augmented Generation para fornecer informações contextuais atualizadas sem modificar parâmetros do modelo.',
@@ -380,6 +384,10 @@ const translations = {
     // Footer
     masterCCDegree: 'Mestrado em Ciência da Computação',
     ofPUCMinas: 'da PUC Minas',
+
+    // Theme Toggle
+    lightTheme: 'Tema Claro',
+    darkTheme: 'Tema Escuro',
 
     // Status labels
     comingSoon: 'Em Breve',

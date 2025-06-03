@@ -16,21 +16,25 @@
   /** @type {ChatInput} */
   let chatInputComponent;
   
+  // Chave para localStorage
+  const STORAGE_KEY = 'loja-artefatos-messages';
+  
   // Scroll to bottom when new messages are added
   $effect(() => { if (messages.length > 0 && chatContainer) {
     setTimeout(() => {
       chatContainer.scrollTop = chatContainer.scrollHeight;
     }, 100);
   }});
+
+  // Salvar mensagens no localStorage sempre que mudarem
+  $effect(() => {
+    if (messages.length > 0) {
+      saveMessagesToStorage();
+    }
+  });
   
   onMount(() => {
-    // Add welcome message specific to Alternative Approaches
-    messages = [{
-      id: Date.now(),
-      text: $t('altApproachesWelcome'),
-      isUser: false,
-      timestamp: new Date()
-    }];
+    loadMessagesFromStorage();
     
     // Focus on input when page loads
     setTimeout(() => {
@@ -39,6 +43,54 @@
       }
     }, 100);
   });
+
+  function saveMessagesToStorage() {
+    try {
+      const messagesToSave = messages.map(msg => ({
+        id: msg.id,
+        text: msg.text,
+        isUser: msg.isUser,
+        timestamp: msg.timestamp.toISOString(),
+        isError: msg.isError || false
+      }));
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(messagesToSave));
+      console.log('Messages saved to localStorage:', messagesToSave.length);
+    } catch (error) {
+      console.error('Error saving messages to localStorage:', error);
+    }
+  }
+
+  function loadMessagesFromStorage() {
+    try {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored) {
+        const parsedMessages = JSON.parse(stored);
+        messages = [];
+        for (const storedMsg of parsedMessages) {
+          messages.push({
+            ...storedMsg,
+            timestamp: new Date(storedMsg.timestamp)
+          });
+        }
+        console.log('Messages loaded from localStorage:', messages.length);
+        return;
+      }
+    } catch (error) {
+      console.error('Error loading messages from localStorage:', error);
+    }
+    
+    // Se não há mensagens salvas ou erro, adicionar mensagem de boas-vindas
+    addWelcomeMessage();
+  }
+
+  function addWelcomeMessage() {
+    messages = [{
+      id: Date.now(),
+      text: 'Olá! Bem-vindo à loja Artefatos Personalizados! 🎨 Sou seu vendedor especialista e posso te ajudar a encontrar o produto perfeito para personalizar. Temos canecas, camisetas, quadros, almofadas e muito mais! Como posso te ajudar hoje?',
+      isUser: false,
+      timestamp: new Date()
+    }];
+  }
   
   async function sendMessage() {
     if (!inputMessage.trim() || isLoading) return;
@@ -56,6 +108,13 @@
     isLoading = true;
     
     try {
+      // Preparar histórico para envio (últimas 20 mensagens, excluindo a atual)
+      const historyForAPI = messages.slice(1, 21).reverse().map(msg => ({
+        text: msg.text,
+        isUser: msg.isUser,
+        timestamp: msg.timestamp
+      }));
+
       const response = await fetch('/api/toy-examples/alternative-approaches', {
         method: 'POST',
         headers: {
@@ -63,7 +122,7 @@
         },
         body: JSON.stringify({
           message: currentInput,
-          history: messages,
+          history: historyForAPI,
           language: $currentLanguage
         })
       });
@@ -172,12 +231,19 @@
   }
   
   function clearChat() {
-    messages = [{
-      id: Date.now(),
-      text: $t('altApproachesWelcome'),
-      isUser: false,
-      timestamp: new Date()
-    }];
+    // Limpar mensagens da memória
+    messages = [];
+    
+    // Limpar localStorage
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+      console.log('Chat history cleared from localStorage');
+    } catch (error) {
+      console.error('Error clearing localStorage:', error);
+    }
+    
+    // Adicionar nova mensagem de boas-vindas
+    addWelcomeMessage();
     
     // Focus on input after clearing chat
     setTimeout(() => {
@@ -189,7 +255,7 @@
 </script>
 
 <svelte:head>
-  <title>{$t('toyExample1Title')} - {$t('masterDefense')} | Pedro Ribeiro</title>
+  <title>Loja de Artefatos Personalizados - {$t('masterDefense')} | Pedro Ribeiro</title>
   <style>
     /* Chat bubble animations */
     .chat {
@@ -212,24 +278,34 @@
 <div class="h-screen flex flex-col overflow-hidden">
   <Navbar currentPage="toy-examples" showClearChat={true} onClearChat={clearChat} />
   
-  <!-- Custom Header for Alternative Approaches - Fixed -->
-  <div class="bg-accent text-accent-content py-3 px-4 shadow-lg flex-shrink-0">
+  <!-- Custom Header for Store - Fixed -->
+  <div class="bg-primary text-primary-content py-3 px-4 shadow-lg flex-shrink-0">
     <div class="max-w-4xl mx-auto flex items-center justify-between">
       <div class="flex items-center gap-3">
-        <div class="p-2 bg-accent-content/20 rounded-full">
+        <div class="p-2 bg-primary-content/20 rounded-full">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
           </svg>
         </div>
         <div>
-          <h1 class="text-lg md:text-xl font-bold">{$t('toyExample1Title')}</h1>
-          <p class="text-xs md:text-sm opacity-90">{$t('specialistDescription')}</p>
+          <h1 class="text-lg md:text-xl font-bold">Artefatos Personalizados</h1>
+          <p class="text-xs md:text-sm opacity-90">Vendedor Virtual com Abordagens Intermediárias</p>
         </div>
       </div>
       <div class="flex items-center gap-2">
         <a 
+          href="/toy-examples/alternative-approaches/dados"
+          class="btn btn-xs md:btn-sm btn-ghost text-primary-content border-primary-content/30 hover:bg-primary-content/20"
+        >
+          <svg class="w-3 h-3 md:w-4 md:h-4 mr-1 md:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+          </svg>
+          <span class="hidden md:inline">Ver Planilhas</span>
+          <span class="md:hidden">Dados</span>
+        </a>
+        <a 
           href="/toy-examples/alternative-approaches/about" 
-          class="btn btn-xs md:btn-sm btn-ghost text-accent-content border-accent-content/30 hover:bg-accent-content/20"
+          class="btn btn-xs md:btn-sm btn-ghost text-primary-content border-primary-content/30 hover:bg-primary-content/20"
         >
           <svg class="w-3 h-3 md:w-4 md:h-4 mr-1 md:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
@@ -239,7 +315,7 @@
         </a>
         <a 
           href="/toy-examples" 
-          class="btn btn-xs md:btn-sm btn-ghost text-accent-content border-accent-content/30 hover:bg-accent-content/20"
+          class="btn btn-xs md:btn-sm btn-ghost text-primary-content border-primary-content/30 hover:bg-primary-content/20"
         >
           <svg class="w-3 h-3 md:w-4 md:h-4 mr-1 md:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
@@ -265,12 +341,12 @@
             <div class="chat-image avatar">
               <div class="w-6 md:w-10 rounded-full bg-primary text-primary-content !flex !items-center !justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3 md:w-5 md:h-5">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
                 </svg>
               </div>
             </div>
             <div class="chat-header text-xs md:text-sm">
-              {$t('toyExample1Title')}
+              Vendedor - Artefatos Personalizados
             </div>
             <div class="chat-bubble chat-bubble-primary text-sm md:text-base">
               <span class="loading loading-dots loading-sm"></span>

@@ -145,8 +145,8 @@
   </div>
   
   <!-- Main Content -->
-  <div class="flex-1 flex items-center justify-center p-4">
-    <div class="w-full max-w-2xl">
+  <div class="flex-1 flex items-center justify-center p-2 md:p-4">
+    <div class="w-full max-w-xl md:max-w-2xl">
       
       {#if isLoading}
         <div class="text-center">
@@ -157,7 +157,7 @@
       {:else if workflowState.isComplete}
         <!-- Results -->
         <div class="card bg-base-100 shadow-xl">
-          <div class="card-body text-center">
+          <div class="card-body p-4 md:p-6 text-center">
             <div class="mb-6">
               <div class="w-20 h-20 mx-auto bg-success text-success-content rounded-full flex items-center justify-center mb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
@@ -256,12 +256,14 @@
       {:else if currentQuestion}
         <!-- Question -->
         <div class="card bg-base-100 shadow-xl">
-          <div class="card-body">
-            <div class="text-center mb-6">
-              <div class="badge badge-primary badge-lg mb-4">
+          <div class="card-body p-4 md:p-6">
+            <div class="text-center mb-4 md:mb-6">
+              <div class="badge badge-primary badge-sm md:badge-md lg:badge-lg mb-3 md:mb-4">
                 {$t('question')} {getQuestionNumber()}
               </div>
-              <h2 class="text-2xl font-bold mb-4">{$t(currentQuestion.textKey as any)}</h2>
+              <h2 class="text-lg md:text-xl lg:text-2xl font-bold mb-2 md:mb-4 leading-tight">
+                {$t(currentQuestion.textKey as any)}
+              </h2>
             </div>
             
             <!-- Answer Options -->
@@ -269,36 +271,38 @@
               {#if currentQuestion.type === 'multiple-choice' && currentQuestion.options}
                 {#each currentQuestion.options as option}
                   <button 
-                    class="btn btn-outline btn-lg w-full justify-start text-left"
+                    class="btn btn-outline btn-sm md:btn-md lg:btn-lg w-full justify-start text-left h-auto min-h-12 md:min-h-16 py-3 px-4"
                     onclick={() => answerQuestion(option.value)}
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mr-3 flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 md:w-5 md:h-5 lg:w-6 lg:h-6 mr-2 md:mr-3 flex-shrink-0">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
                     </svg>
-                    <span class="flex-1">{$t(option.key as any)}</span>
+                    <span class="flex-1 leading-tight text-sm md:text-base lg:text-lg whitespace-normal break-words">
+                      {$t(option.key as any)}
+                    </span>
                   </button>
                 {/each}
               {/if}
             </div>
             
             <!-- Navigation -->
-            <div class="card-actions justify-between mt-8">
+            <div class="card-actions justify-between mt-6 md:mt-8 flex-col sm:flex-row gap-3">
               <button 
-                class="btn btn-ghost"
+                class="btn btn-ghost btn-sm md:btn-md order-2 sm:order-1"
                 onclick={goBack}
                 disabled={!canGoBack}
               >
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 md:w-5 md:h-5 mr-2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
                 </svg>
                 {$t('previous')}
               </button>
               
               <button 
-                class="btn btn-ghost"
+                class="btn btn-ghost btn-sm md:btn-md order-1 sm:order-2"
                 onclick={restartWorkflow}
               >
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 md:w-5 md:h-5 mr-2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
                 </svg>
                 {$t('restart')}
